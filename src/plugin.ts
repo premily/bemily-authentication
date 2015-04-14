@@ -8,6 +8,7 @@ class Auth {
     db:any;
     bcrypt:any;
     boom:any;
+    joi:any;
 
     constructor(private mode:any) {
         this.register.attributes = {
@@ -16,6 +17,7 @@ class Auth {
         };
         this.bcrypt = require('bcrypt');
         this.boom = require('boom');
+        this.joi = require('joi');
     }
 
     register:IRegister = (server, options, next) => {
@@ -61,7 +63,17 @@ class Auth {
                     mode: 'try',
                     strategy: 'session'
                 },
-                handler: this.login
+                handler: this.login,
+                description: 'Perform login against backend.',
+                tags: ['api', 'user', 'auth', 'authentication', 'cookies'],
+                validate: {
+                    payload: {
+                        username: this.joi.string().alphanum().min(3).max(30).required()
+                            .description('User id from "LDAP"'),
+                        password: this.joi.string().alphanum().min(3).max(30).required()
+                            .description('User password (same as rz-password)')
+                    }
+                }
             }
         });
 
