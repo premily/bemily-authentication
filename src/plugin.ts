@@ -7,7 +7,7 @@ export default
 class Auth {
     db: any;
     bcrypt: any;
-    constructor() {
+    constructor(private mode: any) {
         this.register.attributes = {
             name: 'bemily-authentication',
             version: '0.1.0'
@@ -20,7 +20,7 @@ class Auth {
         this._register(server, options);
         server.register(require('hapi-auth-basic'), (err) => {
 
-            server.auth.strategy('simple', 'basic', true, {validateFunc: this.validate});
+            server.auth.strategy('simple', 'basic', this.mode, {validateFunc: this.validate});
 
             server.dependency('bemily-database', (server, continueRegister) => {
                 this.db = server.plugins['bemily-database'];
@@ -35,7 +35,7 @@ class Auth {
             method: 'POST',
             path: '/auth',
             handler: (request, reply) => {
-                console.log('handler');
+                reply();
             }
         })
 
