@@ -32,7 +32,7 @@ class Auth {
 
     private _register(server, options) {
         server.route({
-            method: 'GET',
+            method: 'POST',
             path: '/auth',
             handler: (request, reply) => {
                 console.log('handler');
