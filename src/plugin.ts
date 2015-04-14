@@ -19,7 +19,7 @@ class Auth {
         server.bind(this);
         this._register(server, options);
         server.register(require('hapi-auth-basic'), (err) => {
-            console.log('#1',err);
+
             server.auth.strategy('simple', 'basic', true, {validateFunc: this.validate});
 
             server.dependency('bemily-database', (server, continueRegister) => {
