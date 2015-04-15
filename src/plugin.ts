@@ -15,7 +15,7 @@ class Auth {
             name: 'bemily-authentication',
             version: '0.1.0'
         };
-        this.bcrypt = require('bcrypt');
+        //this.bcrypt = require('bcrypt');
         this.boom = require('boom');
         this.joi = require('joi');
     }

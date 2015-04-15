@@ -29,7 +29,6 @@
     "node-notifier": "^4.1.2"
   },
   "dependencies": {
-    "bcrypt": "^0.8.2",
     "boom": "^2.7.0",
     "hapi-auth-basic": "^2.0.0",
     "hapi-auth-cookie": "^2.0.0",
