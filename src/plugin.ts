@@ -50,9 +50,10 @@ class Auth {
         server.route({
             method: 'GET',
             path: '/logout',
-            handler: (request, reply) => {
-                request.auth.session.clear();
-                reply('logged out');
+            config: {
+                handler: this.logout,
+                description: 'Perform logout against backend.',
+                tags: ['api', 'user', 'auth', 'authentication', 'cookies']
             }
         });
 
@@ -65,6 +66,7 @@ class Auth {
                     strategy: 'session'
                 },
                 handler: this.login,
+
                 description: 'Perform login against backend.',
                 tags: ['api', 'user', 'auth', 'authentication', 'cookies'],
                 validate: {
@@ -78,6 +80,11 @@ class Auth {
             }
         });
 
+    }
+
+    logout (request, reply) {
+        request.auth.session.clear();
+        reply({});
     }
 
     login (request, reply) {
