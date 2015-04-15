@@ -10,7 +10,7 @@ class Auth {
     boom:any;
     joi:any;
 
-    constructor(private mode:any) {
+    constructor(private mode:any, private ttl?:any) {
         this.register.attributes = {
             name: 'bemily-authentication',
             version: '0.1.0'
@@ -30,7 +30,7 @@ class Auth {
 
             server.auth.strategy('session', 'cookie', this.mode, {
                 password: 'secret',
-                ttl: 10000,
+                ttl: this.ttl || 600000,
                 cookie: 'bemily_session',
                 isSecure: false
             });
