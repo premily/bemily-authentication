@@ -31,6 +31,7 @@ class Auth {
             server.auth.strategy('session', 'cookie', this.mode, {
                 password: 'secret',
                 ttl: this.ttl || 600000,
+                keepAlive: true,
                 cookie: 'bemily_session',
                 isSecure: false
             });
